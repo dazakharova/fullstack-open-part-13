@@ -36,13 +36,13 @@ Blog.init({
       sequelize,
       underscored: true,
       timestamps: false,
-      modelName: 'note'
+      modelName: 'blog'
     })
 
 const main = async () => {
   try {
     await sequelize.authenticate()
-    const blogs = await sequelize.query("SELECT * FROM blogs", { type: QueryTypes.SELECT })
+    const blogs = await Blog.findAll()
     for (const blog of blogs) {
       console.log(`${blog.author}: '${blog.title}', ${blog.likes} likes`)
     }
