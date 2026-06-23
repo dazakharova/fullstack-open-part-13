@@ -7,16 +7,16 @@ router.get('/', async (req, res) => {
   res.json(blogs)
 })
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   try {
     const blog = await Blog.create({...req.body})
     return res.json(blog)
   } catch(error) {
-    return res.status(400).json({ error })
+    next(error)
   }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const blog = await Blog.findByPk(req.params.id)
     if (!blog) {
@@ -26,11 +26,11 @@ router.delete('/:id', async (req, res) => {
     await blog.destroy()
     return res.status(204).end()
   } catch (error) {
-    return res.status(400).json({ error })
+    next(error)
   }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const blog = await Blog.findByPk(req.params.id)
     if (!blog) {
@@ -42,7 +42,7 @@ router.put('/:id', async (req, res) => {
     await blog.save()
     return res.status(200).json(blog)
   } catch (error) {
-    return res.status(400).json({ error })
+    next(error)
   }
 })
 
