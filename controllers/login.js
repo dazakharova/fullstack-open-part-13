@@ -9,7 +9,7 @@ router.post('/', async (request, response) => {
 
   const user = await User.findOne({ where: {username: body.username} })
 
-  const passwordCorrect = body.password === 'secret'
+  const passwordCorrect = body.password === user.password
 
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
