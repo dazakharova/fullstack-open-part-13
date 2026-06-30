@@ -6,6 +6,10 @@ const errorHandler = (error, req, res, next) => {
       return res.status(400).json({ error: 'username must be a valid email address' })
     }
 
+    if (error.message.includes('Validation min on year failed')) {
+      return res.status(400).json({ error: 'year must be at least 1991' })
+    }
+
     return res.status(400).json({ error: error.message })
   }
 
