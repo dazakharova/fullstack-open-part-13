@@ -4,11 +4,11 @@ const { User, Blog, ReadingList} = require('../models')
 
 router.get('/', async (req, res) => {
   const users = await User.findAll({
+    attributes: ['id', 'username', 'name'],
     include: [
       {
         model: Blog,
-        as: 'readings',
-        attributes: ['id', 'url', 'title', 'author', 'likes', 'year'],
+        attributes: ['id', 'url', 'title', 'author', 'likes', 'year']
       }
     ]
   })

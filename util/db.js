@@ -5,16 +5,14 @@ const databaseUrl = process.env.TESTING
     ? process.env.TEST_DATABASE_URL
     : process.env.DATABASE_URL
 
-const sequelizeOptions = process.env.TESTING
-    ? {}
-    : {
-      dialectOptions: {
-        ssl: {
-          require: true,
-          rejectUnauthorized: false
-        }
-      }
+const sequelizeOptions = {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
     }
+  }
+}
 
 const sequelize = new Sequelize(databaseUrl, sequelizeOptions)
 
