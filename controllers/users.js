@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
       as: 'readings',
       attributes: ['id', 'url', 'title', 'author', 'likes', 'year'],
       through: {
-        attributes: []
+        attributes: ['id', 'read']
       }
     }
   })
